@@ -1,0 +1,55 @@
+@use "sass:map";
+
+// ----------------------------------------------------------------------------
+// $img_path
+// ----------------------------------------------------------------------------
+$img_path: "../lib/demo-common/img/";
+
+
+// ----------------------------------------------------------------------------
+// Media Query
+// ----------------------------------------------------------------------------
+$breakpoint: (
+  sp: 'screen and (max-width: 768px)',
+  pc: 'print, screen and (min-width: 769px)',
+  pc_wide: 'print, screen and (min-width: 1025px)'
+);
+
+@mixin mq($bp) {
+  @media #{map.get($breakpoint, $bp)} {
+    @content;
+  }
+}
+
+
+// ----------------------------------------------------------------------------
+// hover
+// ----------------------------------------------------------------------------
+// hover mixin
+@mixin hover($include_selectors: ()) {
+
+  @media (hover: hover) and (pointer: fine)  {
+    &:hover {
+      @content;
+    }
+
+    @if $include_selectors != (){
+      @each $selector in $include_selectors {
+        &#{$selector} {
+          @content;
+        }
+      }
+    }
+  }
+}
+
+
+
+// ----------------------------------------------------------------------------
+// Only Safari
+// ----------------------------------------------------------------------------
+@mixin only_safari {
+  @at-root _::-webkit-full-page-media, _:future, :root & {
+    @content;
+  }
+}

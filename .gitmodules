@@ -1,6 +1,3 @@
-[submodule "src/lib/demo"]
-	path = src/lib/demo
-	url = git@github.com.jungissei:jungissei/jquery-modal.git
 [submodule "src/lib/demo-common"]
 	path = src/lib/demo-common
 	url = git@github.com.jungissei:jungissei/demo-common.jquery.jungissei.com.git

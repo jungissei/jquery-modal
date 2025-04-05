@@ -6,18 +6,50 @@ const demoData = {
   meta_demo_name: 'Basic',
   meta_demo_description: 'モーダルの基本形です。'
 };
-%><!DOCTYPE html>
+%>
+<!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <%- include('../lib/demo/inc/_head_begin', demoData) %>
-  </head>
-  <body class="pc_solid">
-    <%- include('../lib/demo/inc/_body_begin') %>
-    <div id="wrapper">
-      <main>
 
-      </main>
-    </div>
-    <%- include('../lib/demo/inc/_body_close', demoData) %>
-  </body>
+<head>
+  <%- include('../lib/demo-common/inc/_head_begin', demoData) %>
+  <%- include('../lib/jquery-modal/_asset_css', demoData) %>
+</head>
+
+<body class="pc_solid">
+  <%- include('../lib/demo-common/inc/_body_begin') %>
+  <div id="wrapper">
+    <main>
+
+
+      <!-- モーダル 開くボタン ここから -->
+      <button type="button" class="demo_btn" data-modal-open="modal_demo">
+        モーダルデモを開く
+      </button>
+      <!-- モーダル 開くボタン ここまで -->
+      <!-- モーダル ダイアログ ここから -->
+      <dialog id="modal_demo" class="modal_dialog" aria-label="モーダルデモ" data-modal-dialog aria-labelledby="demo_modal_dialog_ttl" aria-describedby="demo_modal_dialog_desc">
+
+        <div class="dialog_content">
+          <h2 id="demo_modal_dialog_ttl" class="demo_common_ttl1">モーダルデモのタイトル</h2>
+          <div id="demo_modal_dialog_desc" class="demo_common_txt1">
+            <p>モーダルデモのテキストです。モーダルデモのテキストです。モーダルデモのテキストです。モーダルデモのテキストです。モーダルデモのテキストです。</p>
+            <p>モーダルデモのテキストです。モーダルデモのテキストです。モーダルデモのテキストです。モーダルデモのテキストです。モーダルデモのテキストです。</p>
+            <p>モーダルデモのテキストです。モーダルデモのテキストです。モーダルデモのテキストです。モーダルデモのテキストです。モーダルデモのテキストです。</p>
+          </div>
+
+          <button class="dialog_close" type="button" aria-labelledby="modal_demo_close" data-modal-close>
+            <span id="modal_demo_close" style="display:none">モーダルを閉じる</span>
+          </button>
+        </div>
+
+      </dialog>
+      <!-- モーダル ダイアログ ここまで -->
+
+
+    </main>
+  </div>
+  <%- include('../lib/demo-common/inc/_body_close', demoData) %>
+  <%- include('../lib/jquery-modal/_asset_js', demoData) %>
+</body>
+
 </html>
