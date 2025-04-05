@@ -1,0 +1,24 @@
+<%
+const ver = config.version;
+const demoData = {
+  ver: ver,
+  meta_demo_category_name: config.meta_demo_category_name,
+  meta_demo_name: 'Basic',
+  meta_demo_description: 'モーダルの基本形です。'
+};
+%><!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <%- include('../lib/demo/inc/_head_begin', demoData) %>
+    <link rel="stylesheet" href="./style.css?v=<%= ver %>">
+  </head>
+  <body class="pc_solid">
+    <%- include('../lib/demo/inc/_body_begin') %>
+    <div id="wrapper">
+      <main>
+
+      </main>
+    </div>
+    <%- include('../lib/demo/inc/_body_close', demoData) %>
+  </body>
+</html>

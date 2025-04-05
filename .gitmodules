@@ -1,0 +1,3 @@
+[submodule "src/common/demo"]
+	path = src/common/demo
+	url = git@github.com.jungissei:jungissei/jquery-modal.git

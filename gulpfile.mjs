@@ -43,7 +43,9 @@ gulp.task('sass', gulp.series('lint-scss', function() {
   // 非圧縮版の生成
   const unminified = gulp.src('./src/**/*.scss')
     .pipe(sourcemaps.init())
-    .pipe(sassCompiler().on('error', sassCompiler.logError))
+    .pipe(sassCompiler({
+      includePaths: ['node_modules']
+    }).on('error', sassCompiler.logError))
     .pipe(autoprefixer())
     .pipe(cssbeautify({
       indent: '  ',
@@ -72,16 +74,23 @@ gulp.task('ejs', function() {
   console.log('EJS compilation started...');
   ensureDistDir(); // distディレクトリの作成を確実に行う
 
-  return gulp.src(['./src/**/*.ejs', '!./src/ejs/**/_*.ejs'])
-    .pipe(ejs({
-      // EJSに渡すデータをここで設定
-      title: 'My Site',
-      // その他の変数
-    }))
+  const config = JSON.parse(fs.readFileSync('./ejs/config.json', 'utf-8'));
+
+  return gulp.src(['./src/**/*.ejs', '!./src/**/_*.ejs'])
+    .pipe(ejs({config: config}))
     .pipe(rename({ extname: '.html' }))
     .pipe(gulp.dest('./dist'))
     .on('end', () => {
       console.log('EJS compilation completed!');
+    });
+});
+
+// 画像ファイルのコピータスク
+gulp.task('copy-images', function() {
+  return gulp.src('./src/**/*.{png,jpg,jpeg,gif,svg,webp}')
+    .pipe(gulp.dest('./dist'))
+    .on('end', () => {
+      console.log('Image files copied successfully!');
     });
 });
 
@@ -99,7 +108,8 @@ gulp.task('watch', function() {
 
   gulp.watch('./src/**/*.scss', gulp.series('sass'));
   gulp.watch(['./src/**/*.ejs', '!./src/ejs/**/_*.ejs'], gulp.series('ejs'));
+  gulp.watch('./src/**/*.{png,jpg,jpeg,gif,svg,webp}', gulp.series('copy-images'));
 });
 
 // デフォルトタスク
-gulp.task('default', gulp.series('sass', 'ejs', 'watch'));
+gulp.task('default', gulp.series('sass', 'ejs', 'copy-images', 'watch'));
