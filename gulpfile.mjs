@@ -94,6 +94,15 @@ gulp.task('copy-images', function() {
     });
 });
 
+// jQueryファイルのコピータスク
+gulp.task('copy-jquery', function() {
+  return gulp.src('./node_modules/jquery/dist/jquery.min.js')
+    .pipe(gulp.dest('./dist/lib'))
+    .on('end', () => {
+      console.log('jQuery files copied successfully!');
+    });
+});
+
 // ファイルの変更を監視
 gulp.task('watch', function() {
   browserSync.init({
@@ -112,4 +121,4 @@ gulp.task('watch', function() {
 });
 
 // デフォルトタスク
-gulp.task('default', gulp.series('sass', 'ejs', 'copy-images', 'watch'));
+gulp.task('default', gulp.series('sass', 'ejs', 'copy-images', 'copy-jquery', 'watch'));
