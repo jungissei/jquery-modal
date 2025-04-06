@@ -13,7 +13,6 @@ import fs from 'fs';
 import browserSync from 'browser-sync';
 import babel from 'gulp-babel';
 import uglify from 'gulp-uglify';
-import concat from 'gulp-concat';
 
 const execAsync = promisify(exec);
 const sassCompiler = sass(dartSass);
