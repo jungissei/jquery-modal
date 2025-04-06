@@ -11,6 +11,9 @@ import cssbeautify from 'gulp-cssbeautify';
 import ejs from 'gulp-ejs';
 import fs from 'fs';
 import browserSync from 'browser-sync';
+import babel from 'gulp-babel';
+import uglify from 'gulp-uglify';
+import concat from 'gulp-concat';
 
 const execAsync = promisify(exec);
 const sassCompiler = sass(dartSass);
@@ -19,6 +22,9 @@ const sassCompiler = sass(dartSass);
 function ensureDistDir() {
   if (!fs.existsSync('./dist')) {
     fs.mkdirSync('./dist', { recursive: true });
+  }
+  if (!fs.existsSync('./dist/js')) {
+    fs.mkdirSync('./dist/js', { recursive: true });
   }
 }
 
@@ -103,6 +109,33 @@ gulp.task('copy-jquery', function() {
     });
 });
 
+// JavaScriptのコンパイルタスク
+gulp.task('js', function() {
+  ensureDistDir(); // dist/jsディレクトリの作成を確実に行う
+
+  // 非圧縮版の生成
+  const unminified = gulp.src('./src/**/*.js')
+    .pipe(sourcemaps.init())
+    .pipe(babel({
+      presets: ['@babel/preset-env']
+    }))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('./dist'));
+
+  // 圧縮版の生成
+  const minified = gulp.src('./src/**/*.js')
+    .pipe(sourcemaps.init())
+    .pipe(babel({
+      presets: ['@babel/preset-env']
+    }))
+    .pipe(uglify())
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('./dist'));
+
+  return Promise.all([unminified, minified]);
+});
+
 // ファイルの変更を監視
 gulp.task('watch', function() {
   browserSync.init({
@@ -118,7 +151,8 @@ gulp.task('watch', function() {
   gulp.watch('./src/**/*.scss', gulp.series('sass'));
   gulp.watch(['./src/**/*.ejs', '!./src/ejs/**/_*.ejs'], gulp.series('ejs'));
   gulp.watch('./src/**/*.{png,jpg,jpeg,gif,svg,webp}', gulp.series('copy-images'));
+  gulp.watch('./src/**/*.js', gulp.series('js'));
 });
 
 // デフォルトタスク
-gulp.task('default', gulp.series('sass', 'ejs', 'copy-images', 'copy-jquery', 'watch'));
+gulp.task('default', gulp.series('sass', 'ejs', 'copy-images', 'copy-jquery', 'js', 'watch'));
