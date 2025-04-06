@@ -1,3 +1,6 @@
 [submodule "src/lib/demo-common"]
 	path = src/lib/demo-common
 	url = git@github.com.jungissei:jungissei/demo-common.jquery.jungissei.com.git
+[submodule "src/lib/scss-mixin-utilities"]
+	path = src/lib/scss-mixin-utilities
+	url = git@github.com.jungissei:jungissei/scss-mixin-utilities.git
