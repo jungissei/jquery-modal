@@ -1,5 +1,5 @@
 @use "sass:math";
-@use "./mixin" as *;
+@use "../scss-mixin-utilities/mixin" as *;
 
 @include mq(pc){
   // ----------------------------------------------------------------------------
@@ -31,7 +31,7 @@
     transition: opacity 0.3s ease;
 
     // Safariの時
-    @include only_safari{
+    @include only_browser(safari){
       max-height: calc(100svh - 60px);
     }
 
