@@ -11,7 +11,11 @@
         "except": ["blockless-after-same-name-blockless", "first-nested"],
         "ignore": ["after-comment", "inside-block"]
       }
-    ]
+    ],
+    "selector-class-pattern": null,
+    "custom-property-pattern": null,
+    "keyframes-name-pattern": null,
+    "scss/dollar-variable-pattern": null
   },
   "overrides": [
     {
