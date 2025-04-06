@@ -13,6 +13,7 @@ import fs from 'fs';
 import browserSync from 'browser-sync';
 import babel from 'gulp-babel';
 import uglify from 'gulp-uglify';
+import eslint from 'gulp-eslint';
 
 const execAsync = promisify(exec);
 const sassCompiler = sass(dartSass);
@@ -108,9 +109,17 @@ gulp.task('copy-jquery', function() {
     });
 });
 
-// JavaScriptのコンパイルタスク
-gulp.task('js', function() {
-  ensureDistDir(); // dist/jsディレクトリの作成を確実に行う
+// ESLintタスクを追加
+gulp.task('lint-js', function() {
+  return gulp.src(['./src/**/*.js'])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
+
+// JavaScriptのコンパイルタスクを修正
+gulp.task('js', gulp.series('lint-js', function() {
+  ensureDistDir();
 
   // 非圧縮版の生成
   const unminified = gulp.src('./src/**/*.js')
@@ -133,7 +142,7 @@ gulp.task('js', function() {
     .pipe(gulp.dest('./dist'));
 
   return Promise.all([unminified, minified]);
-});
+}));
 
 // ファイルの変更を監視
 gulp.task('watch', function() {
