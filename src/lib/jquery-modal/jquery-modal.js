@@ -31,22 +31,22 @@
       const modal = this.element;
 
       // モーダルを開くトリガーと閉じるトリガーを取得
-      const openTriggers = $(`[data-modal-open="${modal.id}"]`);
-      const closeTriggers = $(modal).find("[data-modal-close]");
+      const openTriggers = $('[data-modal-open="' + modal.id + '"]');
+      const closeTriggers = $(modal).find('[data-modal-close]');
 
       // 開くトリガーにイベントリスナーを追加
-      openTriggers.on("click", function(event) {
+      openTriggers.on('click', function(event) {
         this.handleOpenTriggerClick(event, modal, event.currentTarget);
       }.bind(this));
-      openTriggers.on("mousedown keydown", this.handleTriggerFocus);
+      openTriggers.on('mousedown keydown', this.handleTriggerFocus);
 
       // 閉じるトリガーにイベントリスナーを追加
-      closeTriggers.on("click", function(event) {
+      closeTriggers.on('click', function(event) {
         this.handleCloseTriggerClick(event, modal);
       }.bind(this));
 
       // data-modal-dialog-default-open属性を持つ場合、ページ読み込み時にモーダルを開く
-      if ($(modal).is("[data-modal-dialog-default-open]") && !$("[data-modal-dialog-default-open]:visible").length) {
+      if ($(modal).is('[data-modal-dialog-default-open]') && !$('[data-modal-dialog-default-open]:visible').length) {
         this.openModal(modal);
       }
     },
@@ -59,9 +59,8 @@
     waitModalAnimation: function (modal) {
 
       // モーダル内のアニメーションがない場合、すぐに解決されたPromiseを返す
-      // if ($(modal).find(":animated").length === 0 && !$(modal).is(":hidden")){
       if (modal.getAnimations().length === 0){
-        console.log("no animation");
+
         return Promise.resolve([]);
       }
 
@@ -92,8 +91,8 @@
 
       if (add) {
         // イベントリスナーをモーダルとウィンドウに追加
-        $(modal).on("click", backdropClickListener);
-        $(window).on("keydown", keyDownListener);
+        $(modal).on('click', backdropClickListener);
+        $(window).on('keydown', keyDownListener);
         // イベントリスナーマップにリスナーを追加
         this.eventListenersMap.set(modal, {
           backdropClickListener,
@@ -103,8 +102,8 @@
         // イベントリスナーをモーダルとウィンドウから削除
         const listeners = this.eventListenersMap.get(modal);
         if (listeners) {
-          $(modal).off("click", listeners.backdropClickListener);
-          $(window).off("keydown", listeners.keyDownListener);
+          $(modal).off('click', listeners.backdropClickListener);
+          $(window).off('keydown', listeners.keyDownListener);
           // イベントリスナーマップからリスナーを削除
           this.eventListenersMap.delete(modal);
         }
@@ -158,12 +157,12 @@
      */
     handleTriggerFocus: function (event) {
       // マウスダウンイベントが発生した場合、HTML要素に属性を設定
-      if (event.type === "mousedown") {
-        $("html").attr("data-mousedown", "true");
+      if (event.type === 'mousedown') {
+        $('html').attr('data-mousedown', 'true');
       }
       // キーダウンイベントが発生した場合、HTML要素から属性を削除
-      if (event.type === "keydown") {
-        $("html").removeAttr("data-mousedown");
+      if (event.type === 'keydown') {
+        $('html').removeAttr('data-mousedown');
       }
     },
 
@@ -187,9 +186,9 @@
      */
     handleKeyDown: function (event, modal) {
       // HTML要素からマウスダウンのデータ属性を削除
-      $("html").removeAttr("data-mousedown");
+      $('html').removeAttr('data-mousedown');
       // Escapeキーが押された場合の処理
-      if (event.key === "Escape") {
+      if (event.key === 'Escape') {
         // デフォルトのイベントをキャンセル
         event.preventDefault();
         // モーダルを閉じる
@@ -215,7 +214,7 @@
       const $modal = $(modal);
 
       // モーダルが開く前のイベントをトリガー
-      $modal.trigger("modal.before_open");
+      $modal.trigger('modal.before_open');
 
       // モーダルを表示状態にする
       modal.showModal();
@@ -227,14 +226,14 @@
       // アニメーションフレームをリクエストして非同期処理を実行
       requestAnimationFrame(async function() {
         // モーダルがアクティブであることを示す属性を設定
-        $modal.attr("data-modal-active", "true");
+        $modal.attr('data-modal-active', 'true');
         // モーダルのアニメーション完了を待機
         await this.waitModalAnimation(modal);
         // トランジション状態を終了に設定
         this.isTransitioning = false;
 
         // モーダルが開いた後のイベントをトリガー
-        $modal.trigger("modal.after_open");
+        $modal.trigger('modal.after_open');
       }.bind(this));
     },
 
@@ -243,9 +242,9 @@
      * @param {HTMLElement} currentModal - 現在開こうとしているモーダル要素
      */
     closeOtherModals: function (currentModal) {
-      $("[data-modal-dialog]").each(function () {
-        let modal = $(this).data("modal");
-        if (modal && this !== currentModal && $(this).attr("data-modal-active") === "true") {
+      $('[data-modal-dialog]').each(function () {
+        let modal = $(this).data('modal');
+        if (modal && this !== currentModal && $(this).attr('data-modal-active') === 'true') {
           modal.close();
         }
       });
@@ -266,10 +265,10 @@
 
       let $modal = $(modal);
       // モーダルが閉じる前のイベントをトリガー
-      $modal.trigger("modal.before_close");
+      $modal.trigger('modal.before_close');
 
       // モーダルのアクティブ状態を解除
-      $modal.attr("data-modal-active", "false");
+      $modal.attr('data-modal-active', 'false');
       // 背景固定を解除
       this.backfaceFixed(false);
       // イベントリスナーを削除
@@ -290,7 +289,7 @@
       this.isTransitioning = false;
 
       // モーダルが閉じた後のイベントをトリガー
-      $modal.trigger("modal.after_close");
+      $modal.trigger('modal.after_close');
     },
 
     /**
@@ -298,8 +297,8 @@
      * @returns {boolean} 垂直書きの場合はtrue、それ以外はfalse
      */
     isVerticalWritingMode: function () {
-      const writingMode = $("html").css("writing-mode");
-      return writingMode.includes("vertical");
+      const writingMode = $('html').css('writing-mode');
+      return writingMode.includes('vertical');
     },
 
     /**
@@ -309,9 +308,9 @@
      */
     getScrollBarSize: function () {
       // 水平スクロールバーのサイズを計算
-      const scrollBarXSize = window.innerHeight - $("body").height();
+      const scrollBarXSize = window.innerHeight - $('body').height();
       // 垂直スクロールバーのサイズを計算
-      const scrollBarYSize = window.innerWidth - $("body").width();
+      const scrollBarYSize = window.innerWidth - $('body').width();
       // 垂直書きの場合は水平スクロールバーのサイズを、それ以外の場合は垂直スクロールバーのサイズを返す
       return this.isVerticalWritingMode() ? scrollBarXSize : scrollBarYSize;
     },
@@ -330,7 +329,7 @@
           : $(document.scrollingElement).scrollTop();
       }
       // 固定されていない場合はbodyのinset-block-startの値を整数で返す
-      return parseInt($("body").css("inset-block-start") || "0", 10);
+      return parseInt($('body').css('inset-block-start') || '0', 10);
     },
 
     /**
@@ -341,17 +340,17 @@
     applyStyles: function (scrollPosition, apply) {
       // スタイル設定オブジェクト
       const styles = {
-        blockSize: "100dvb", // ブロックサイズ
-        insetInlineStart: "0", // インライン開始位置
-        position: "fixed", // 位置固定
+        blockSize: '100dvb', // ブロックサイズ
+        insetInlineStart: '0', // インライン開始位置
+        position: 'fixed', // 位置固定
         insetBlockStart: this.isVerticalWritingMode() // ブロック開始位置
-          ? `${scrollPosition}px`
-          : `${scrollPosition * -1}px`,
-        inlineSize: "100dvi", // インラインサイズ
+          ? scrollPosition + 'px'
+          : (scrollPosition * -1) + 'px',
+        inlineSize: '100dvi', // インラインサイズ
       };
       // スタイルを適用または削除
       Object.keys(styles).forEach(function(key) {
-        $("body").css(key, apply ? styles[key] : "");
+        $('body').css(key, apply ? styles[key] : '');
       });
     },
 
@@ -362,8 +361,8 @@
     restorePosition: function (scrollPosition) {
       // スクロールオプションを設定
       const options = {
-        behavior: "instant", // スクロール動作を即時に設定
-        [this.isVerticalWritingMode() ? "left" : "top"]: this.isVerticalWritingMode()
+        behavior: 'instant', // スクロール動作を即時に設定
+        [this.isVerticalWritingMode() ? 'left' : 'top']: this.isVerticalWritingMode()
           ? scrollPosition // 垂直書きの場合は左スクロール位置を設定
           : scrollPosition * -1, // 水平書きの場合は上スクロール位置を設定（逆方向）
       };
@@ -381,7 +380,7 @@
       // 現在のスクロール位置を取得
       const scrollPosition = this.getScrollPosition(fixed);
       // bodyのpadding-inline-endを設定（固定時はスクロールバーの幅、非固定時は0）
-      $("body").css("padding-inline-end", fixed ? `${scrollBarWidth}px` : "");
+      $('body').css('padding-inline-end', fixed ? scrollBarWidth + 'px' : '');
       // スクロール位置に基づいてスタイルを適用または削除
       this.applyStyles(scrollPosition, fixed);
       // 固定が解除された場合、スクロール位置を元に戻す
@@ -406,7 +405,7 @@
       // 各要素に対して処理を行います。
       return this.each(function () {
         // 現在の要素からモーダルデータを取得します。
-        let modal = $(this).data("modal");
+        let modal = $(this).data('modal');
 
         // モーダルデータが存在する場合にのみアクションを実行
         if (modal) {
@@ -425,12 +424,12 @@
     // 各要素に対して処理を行います。
     return this.each(function () {
       // 現在の要素からモーダルデータを取得します。
-      let modal = $(this).data("modal");
+      let modal = $(this).data('modal');
 
       // モーダルデータが存在しない場合、新たに作成してデータを設定します。
       if (!modal) {
         modal = new Modal(this); // 新しいモーダルインスタンスを作成
-        $(this).data("modal", modal); // 作成したモーダルインスタンスを要素に紐付け
+        $(this).data('modal', modal); // 作成したモーダルインスタンスを要素に紐付け
       }
 
       // openオプションがtrueの場合、モーダルを自動的に開きます。
@@ -443,7 +442,7 @@
   /**
    * モーダルダイアログを持つ要素に対してモーダル機能を適用します。
    */
-  $("[data-modal-dialog]").each(function () {
+  $('[data-modal-dialog]').each(function () {
     // 各要素にモーダル機能を適用
     $(this).modal();
   });
