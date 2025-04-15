@@ -1,7 +1,7 @@
 // モーダルを開くテスト
 const $ = require('jquery');
 // モーダルプラグインを読み込む（パスを修正）
-require('../dist/lib/jquery-modal/jquery-modal.js');
+require('../../dist/lib/jquery-modal/jquery-modal.js');
 
 describe('Modal Open Tests', () => {
   beforeEach(() => {
