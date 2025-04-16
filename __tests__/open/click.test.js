@@ -1,13 +1,7 @@
-// モーダルを開くテスト
-const $ = require('jquery');
-// モーダルプラグインを読み込む（パスを修正）
-require('../../dist/lib/jquery-modal/jquery-modal.js');
-
 // モーダルのセットアップをインポート
 const setupModalDom = require('../testSetup/modalSetup');
 
 const {
-  initModal,
   openModal,
   waitForAnimationFrame,
   getModalState
@@ -19,7 +13,6 @@ describe('Modal Open Tests', () => {
   });
 
   test('モーダルが正しく開く', async () => {
-    initModal();
     openModal('modal_demo');
     await waitForAnimationFrame();
 

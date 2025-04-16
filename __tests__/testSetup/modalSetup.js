@@ -29,6 +29,9 @@ function setupModalDom() {
       </div>
     </dialog>
   `;
+
+  const $ = require('jquery');
+  require('../../dist/lib/jquery-modal/jquery-modal.js');
 }
 
 module.exports = setupModalDom;
