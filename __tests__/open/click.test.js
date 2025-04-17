@@ -1,7 +1,5 @@
-// モーダルのセットアップをインポート
-const setupModalDom = require('../testSetup/modalSetup');
-
 const {
+  setupModalDom,
   openModal,
   waitForAnimationFrame,
   getModalState
