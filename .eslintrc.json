@@ -11,7 +11,7 @@
     "parser": "@babel/eslint-parser"
   },
   "rules": {
-    "no-console": "error",
+    // "no-console": "error",
     "func-names": "off",
     "semi": ["error", "always"],
     "quotes": ["error", "single"],
