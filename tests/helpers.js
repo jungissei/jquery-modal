@@ -1,11 +1,15 @@
 import { expect } from '@playwright/test';
 
 export async function assertModalOpen(page) {
+  // --------------------------------------
   // モーダルを開くテスト
+  // --------------------------------------
   const dialog = page.getByRole('dialog');
   await expect(dialog).toHaveAttribute('data-modal-active', 'true');
 
+  // --------------------------------------
   // body要素のスクロール固定テスト
+  // --------------------------------------
   const body = page.locator('body');
 
   const actualBlockSize = await body.evaluate((el) => {
