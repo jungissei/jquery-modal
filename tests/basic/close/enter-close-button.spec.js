@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { assertModalOpen, assertModalClose } from '../helpers';
+import { assertModalOpen, assertModalClose } from '../../helpers';
 
 test("クリックでモーダルを開く", async ({ page }) => {
   await page.goto('http://localhost:3001/basic/index.html');
@@ -9,7 +9,7 @@ test("クリックでモーダルを開く", async ({ page }) => {
   // 共通の検証ロジックを呼び出し
   await assertModalOpen(page);
 
-  await page.getByRole('button', { name: 'モーダルを閉じる' }).press('Space');
+  await page.getByRole('button', { name: 'モーダルを閉じる' }).press('Enter');
 
   // 共通の検証ロジックを呼び出し
   await assertModalClose(page);

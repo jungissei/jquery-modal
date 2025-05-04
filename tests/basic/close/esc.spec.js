@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { assertModalOpen, assertModalClose } from '../helpers';
+import { assertModalOpen, assertModalClose } from '../../helpers';
 
 test("クリックでモーダルを開く", async ({ page }) => {
   await page.goto('http://localhost:3001/basic/index.html');
