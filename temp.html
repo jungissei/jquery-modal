@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M6W37B6');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width">
+<title>Basic / Modal | jQuery UI</title>
+<meta name="description" content="モーダルの基本形です。このページはjQueryを利用したUIライブラリのデモページです。">
+<link rel="icon" href="../lib/demo-common/img/favicon.png?v=1.0.0" sizes="any">
+<link id="demo-common-css" rel="stylesheet" href="../lib/demo-common/css/style.css?v=1.0.0">
+
+  <link id="jquery-modal-css" rel="stylesheet" href="../lib/jquery-modal/jquery-modal.min.css?v=1.0.0">
+
+</head>
+
+<body class="pc_solid">
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M6W37B6"
+height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+  <div id="wrapper">
+    <main>
+
+      <h1>Modal Basic</h1>
+<p>モーダルの基本形です。</p>
+
+
+      <!-- モーダル 開くボタン ここから -->
+      <button type="button" class="demo_btn" data-modal-open="modal_demo">
+        モーダルデモを開く
+      </button>
+      <!-- モーダル 開くボタン ここまで -->
+      <!-- モーダル ダイアログ ここから -->
+      <dialog id="modal_demo" class="modal_dialog" aria-label="モーダルデモ" data-modal-dialog aria-labelledby="demo_modal_dialog_ttl" aria-describedby="demo_modal_dialog_desc">
+
+        <div class="dialog_content">
+          <h2 id="demo_modal_dialog_ttl" class="demo_common_ttl1">モーダルデモのタイトル</h2>
+          <div id="demo_modal_dialog_desc" class="demo_common_txt1">
+            <p>モーダルデモのテキストです。モーダルデモのテキストです。モーダルデモのテキストです。モーダルデモのテキストです。モーダルデモのテキストです。</p>
+            <p>モーダルデモのテキストです。モーダルデモのテキストです。モーダルデモのテキストです。モーダルデモのテキストです。モーダルデモのテキストです。</p>
+            <p>モーダルデモのテキストです。モーダルデモのテキストです。モーダルデモのテキストです。モーダルデモのテキストです。モーダルデモのテキストです。</p>
+          </div>
+
+          <button class="dialog_close" type="button" aria-labelledby="modal_demo_close" data-modal-close>
+            <span id="modal_demo_close" style="display:none">モーダルを閉じる</span>
+          </button>
+        </div>
+
+      </dialog>
+      <!-- モーダル ダイアログ ここまで -->
+
+
+    </main>
+  </div>
+  <script src="../lib/jquery.min.js"></script>
+
+  <script id="jquery-modal-js" src="../lib/jquery-modal/jquery-modal.js?v=1.0.0"></script>
+
+</body>
+
+</html>

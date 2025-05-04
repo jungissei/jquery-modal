@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "markuplint:recommended"
+  ],
+  "parser": {
+    ".html$": "@markuplint/html-parser"
+  },
+  "rules": {
+    "attr-duplication": true,
+    "character-reference": true,
+    "deprecated-element": true,
+    "doctype": true,
+    "id-duplication": true,
+    "required-h1": true,
+    "no-empty-palpable-content": true,
+    "permitted-contents": true,
+    "required-attr": true
+  }
+}
