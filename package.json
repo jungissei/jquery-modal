@@ -13,8 +13,7 @@
     "serve": "serve dist",
     "dev": "npx gulp watch",
     "test": "jest --verbose --detectOpenHandles",
-    "test:watch": "jest --watch",
-    "html:lint": "markuplint dist/**/*.html"
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.1",
@@ -44,5 +43,6 @@
     "stylelint": "^16.16.0",
     "stylelint-config-standard": "^37.0.0",
     "stylelint-config-standard-scss": "^14.0.0"
-  }
+  },
+  "type": "module"
 }
