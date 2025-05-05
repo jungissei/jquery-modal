@@ -7,7 +7,7 @@ import path from 'path';
 const execAsync = promisify(exec);
 
 async function lintHtml(url) {
-  let tempFile;
+  let tempFilePath;
   try {
     // URLからファイル名を生成
     const fileName = url.split('/').pop() || 'index.html';
@@ -29,14 +29,14 @@ async function lintHtml(url) {
 
     // 一時ファイルに保存
     const uniqueId = crypto.randomUUID();
-    tempFile = path.join(process.cwd(), `markuplint/temp_${uniqueId}.html`);
-    await writeFile(tempFile, html);
+    tempFilePath = path.join(process.cwd(), `markuplint/temp_${uniqueId}.html`);
+    await writeFile(tempFilePath, html);
 
     // markuplintを実行
     let stdout = '';
     let stderr = '';
     try {
-      const result = await execAsync(`npx markuplint ${tempFile}`);
+      const result = await execAsync(`npx markuplint ${tempFilePath}`);
       stdout = result.stdout;
       stderr = result.stderr;
     } catch (execError) {
@@ -62,11 +62,11 @@ async function lintHtml(url) {
     console.error(`Error processing ${url}:`, error.message);
   } finally {
     // 一時ファイルを削除
-    if (tempFile) {
+    if (tempFilePath) {
       try {
-        await unlink(tempFile);
+        await unlink(tempFilePath);
       } catch (rmError) {
-        console.error(`Failed to remove temp file: ${tempFile}`, rmError.message);
+        console.error(`Failed to remove temp file: ${tempFilePath}`, rmError.message);
       }
     }
   }
