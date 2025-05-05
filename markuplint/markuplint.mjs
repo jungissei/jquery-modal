@@ -28,7 +28,8 @@ async function lintHtml(url) {
     const html = response.data;
 
     // 一時ファイルに保存
-    tempFile = path.join(process.cwd(), `markuplint/temp_index.html`);
+    const uniqueId = crypto.randomUUID();
+    tempFile = path.join(process.cwd(), `markuplint/temp_${uniqueId}.html`);
     await writeFile(tempFile, html);
 
     // markuplintを実行
