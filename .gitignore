@@ -5,3 +5,6 @@
 /test-results
 /artifacts
 /markuplint/report
+/.storybook/dist
+
+*storybook.log
